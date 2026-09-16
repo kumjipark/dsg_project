@@ -49,3 +49,4 @@ node_modules
 # 빌드 산출물은 루트만 제외한다. vendor/*/dist 는 배포에 필요하므로 커밋한다.
 /dist
 /dist-ssr
+.vercel
