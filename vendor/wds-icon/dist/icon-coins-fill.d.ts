@@ -1,0 +1,14 @@
+import * as _$react from "react";
+import { SxProp } from "@wanteddev/wds-engine";
+
+//#region src/icon-coins-fill.d.ts
+/**
+ * 쌓인 동전을 표현합니다.
+ * 키워드: Coins, Stacked Rewards 리워드, 코인, 동전, Money, 돈
+ * 속성: Solid
+ */
+declare const IconCoinsFill: _$react.ForwardRefExoticComponent<Omit<_$react.SVGProps<SVGSVGElement>, "ref"> & {
+  sx?: SxProp;
+} & _$react.RefAttributes<SVGSVGElement>>;
+//#endregion
+export { IconCoinsFill as default };

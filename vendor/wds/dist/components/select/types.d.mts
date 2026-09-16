@@ -1,0 +1,42 @@
+import { MenuGroupProps, MenuItemProps } from "../menu/types.mjs";
+import { MenuContent } from "../menu/index.mjs";
+import { Merge, ResponsiveProps, WithSxProps } from "@wanteddev/wds-engine";
+import { CSSProperties, ComponentProps, ReactNode } from "react";
+
+//#region src/components/select/types.d.ts
+type SelectDefaultProps = WithSxProps<{
+  /** Whether the select is invalid. */invalid?: boolean; /** Whether the select is disabled. */
+  disabled?: boolean; /** The width of the select. */
+  width?: CSSProperties['width']; /** The height of the select. */
+  height?: CSSProperties['height']; /** The name of the select. */
+  name?: string; /** The value of the select. */
+  value?: string; /** The default value of the select. */
+  defaultValue?: string; /** The placeholder of the select. */
+  placeholder?: string; /** The leading content of the select. */
+  leadingContent?: ReactNode; /** The render function of the select. */
+  render?: (label: ReactNode, value: string) => ReactNode; /** Callback function when the value changes. */
+  onChange?: (value: string) => void; /** The content props of the select. */
+  contentProps?: ComponentProps<typeof MenuContent>; /** Whether the select is open. */
+  open?: boolean; /** Whether the select is open by default. */
+  defaultOpen?: boolean; /** Callback function when the open state changes. */
+  onOpenChange?: (state: boolean) => void; /** Whether to enable the menu action area. */
+  enableMenuActionArea?: boolean;
+  /**
+   * The value selected in the menu when it is open,
+   * which can be different from the actual value.
+   * This is used when `enableMenuActionArea` is true, allowing you to display a different
+   * menu selection state while editing, before confirming the actual value.
+   */
+  menuValue?: string; /** Callback function when the menu value changes. */
+  onMenuValueChange?: (value: string) => void;
+  children?: ReactNode;
+}>;
+type SelectResponsiveProps = ResponsiveProps<Pick<SelectDefaultProps, 'width' | 'height'>>;
+type SelectProps = Merge<SelectDefaultProps, SelectResponsiveProps>;
+type OptionGroupProps = MenuGroupProps;
+type OptionProps = Merge<{
+  /** The leading content of the option. Pass an element wrapped with `OptionContent`. */leadingContent?: ReactNode; /** The trailing content of the option. Pass an element wrapped with `OptionContent`. */
+  trailingContent?: ReactNode;
+}, MenuItemProps>;
+//#endregion
+export { OptionGroupProps, OptionProps, SelectDefaultProps, SelectProps, SelectResponsiveProps };

@@ -1,0 +1,14 @@
+import { TypographyProps } from "../typography/types.mjs";
+import { AccordionContentProps, AccordionDescriptionProps, AccordionDetailsProps, AccordionProps, AccordionSummaryContentProps, AccordionSummaryProps } from "./types.mjs";
+import { DefaultComponentPropsInternal, PolymorphicComponentInternal } from "@wanteddev/wds-engine";
+import * as _$react from "react";
+
+//#region src/components/accordion/index.d.ts
+declare const Accordion: _$react.ForwardRefExoticComponent<Omit<DefaultComponentPropsInternal<AccordionProps, "div">, "ref"> & _$react.RefAttributes<HTMLDivElement>>;
+declare const AccordionSummary: _$react.ForwardRefExoticComponent<Omit<DefaultComponentPropsInternal<AccordionSummaryProps, "div">, "ref"> & _$react.RefAttributes<HTMLDivElement>>;
+declare const AccordionSummaryContent: _$react.ForwardRefExoticComponent<Omit<DefaultComponentPropsInternal<AccordionSummaryContentProps, "div">, "ref"> & _$react.RefAttributes<HTMLDivElement>>;
+declare const AccordionDetails: PolymorphicComponentInternal<AccordionDetailsProps, "div">;
+declare const AccordionDescription: _$react.ForwardRefExoticComponent<Omit<DefaultComponentPropsInternal<TypographyProps, "p">, "ref"> & _$react.RefAttributes<HTMLParagraphElement>>;
+declare const AccordionContent: PolymorphicComponentInternal<AccordionContentProps, "div">;
+//#endregion
+export { Accordion, AccordionContent, type AccordionContentProps, AccordionDescription, type AccordionDescriptionProps, AccordionDetails, type AccordionDetailsProps, type AccordionProps, AccordionSummary, AccordionSummaryContent, type AccordionSummaryContentProps, type AccordionSummaryProps };

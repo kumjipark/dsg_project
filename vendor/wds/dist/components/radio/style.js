@@ -1,0 +1,158 @@
+'use client';
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+require("../../_virtual/_rolldown/runtime.js");
+const require_utils_internal_responsive_props = require("../../utils/internal/responsive-props.js");
+const require_utils_typography = require("../../utils/typography.js");
+let _wanteddev_wds_engine = require("@wanteddev/wds-engine");
+//#region src/components/radio/style.ts
+const radioStyle = ({ size, checked, tight, disabled, xs, sm, md, lg, xl }) => (theme) => _wanteddev_wds_engine.css`
+    display: flex;
+    padding: 2px;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: ${theme.semantic.static.white};
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+    border-radius: 9999px;
+
+    & ~ label {
+      cursor: pointer;
+    }
+
+    span {
+      background-color: ${theme.semantic.background.normal.normal};
+      box-shadow: inset 0 0 0 1.5px ${theme.semantic.line.normal.normal};
+      border-radius: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: transparent;
+
+      // safari
+      @supports (-webkit-backdrop-filter: none) {
+        box-shadow: inset 0 0 0 1px ${theme.semantic.line.normal.normal};
+
+        @media only screen and (-webkit-device-pixel-ratio: 2),
+          only screen and (-moz-device-pixel-ratio: 2),
+          only screen and (device-pixel-ratio: 2) {
+          box-shadow: inset 0 0 0 1.5px ${theme.semantic.line.normal.normal};
+        }
+
+        @media only screen and (-webkit-device-pixel-ratio: 3),
+          only screen and (-moz-device-pixel-ratio: 3),
+          only screen and (device-pixel-ratio: 3) {
+          box-shadow: inset 0 0 0 1.33333333px
+            ${theme.semantic.line.normal.normal};
+          transform: translate(0);
+        }
+      }
+    }
+
+    & svg {
+      pointer-events: none;
+    }
+
+    &:focus-visible {
+      outline: none;
+
+      span {
+        outline-style: solid;
+        outline-width: 2px;
+        outline-offset: 2px;
+        outline-color: Highlight;
+        outline-color: -webkit-focus-ring-color;
+      }
+    }
+
+    ${radioSizeStyle({
+	size,
+	tight
+}, theme)}
+
+    ${checked && _wanteddev_wds_engine.css`
+      span {
+        box-shadow: none;
+        background-color: ${theme.semantic.primary.normal};
+        color: ${theme.semantic.static.white};
+      }
+    `}
+
+  ${disabled && _wanteddev_wds_engine.css`
+      opacity: ${theme.opacity[43]};
+
+      & ~ label,
+      & {
+        cursor: initial;
+      }
+
+      & ~ label {
+        color: ${theme.semantic.label.disable};
+      }
+    `}
+
+      ${require_utils_internal_responsive_props.createResponsiveStyle({
+	xs,
+	sm,
+	md,
+	lg,
+	xl
+}, theme)((params) => _wanteddev_wds_engine.css`
+        ${radioSizeStyle({
+	size: params?.size,
+	tight
+}, theme)}
+        ${params?.sx}
+      `)}
+  `;
+const radioSizeStyle = ({ size, tight }, theme) => {
+	switch (size) {
+		case "medium": return _wanteddev_wds_engine.css`
+        width: 24px;
+        height: 24px;
+        font-size: 16px;
+
+        span {
+          padding: 2px;
+        }
+
+        & ~ label {
+          ${require_utils_typography.typographyStyle("body2", "regular")}
+          color: ${theme.semantic.label.normal};
+        }
+
+        ${tight && _wanteddev_wds_engine.css`
+          width: 20px;
+
+          [wds-component='with-interaction'] {
+            width: calc(100% + 12px);
+          }
+        `}
+      `;
+		case "small": return _wanteddev_wds_engine.css`
+        width: 20px;
+        height: 20px;
+        font-size: 14px;
+
+        span {
+          padding: 1px;
+        }
+
+        & ~ label {
+          ${require_utils_typography.typographyStyle("label1", "regular")}
+          color: ${theme.semantic.label.normal};
+        }
+
+        ${tight && _wanteddev_wds_engine.css`
+          width: 16px;
+
+          [wds-component='with-interaction'] {
+            width: calc(100% + 12px);
+          }
+        `}
+      `;
+	}
+};
+//#endregion
+exports.radioStyle = radioStyle;

@@ -1,0 +1,10 @@
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const require_utils_index = require("./utils/index.js");
+const require_theme_index = require("./theme/index.js");
+exports.addHexOpacity = require_utils_index.addHexOpacity;
+exports.darkOriginTheme = require_theme_index.darkOriginTheme;
+exports.darkTheme = require_theme_index.darkTheme;
+exports.getColorByToken = require_utils_index.getColorByToken;
+exports.lightOriginTheme = require_theme_index.lightOriginTheme;
+exports.lightTheme = require_theme_index.lightTheme;
+exports.theme = require_theme_index.theme;

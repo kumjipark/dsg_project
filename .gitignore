@@ -23,7 +23,6 @@ logs/
 
 # Dependencies / build output
 node_modules/
-dist/
 build/
 __pycache__/
 *.py[cod]
@@ -36,8 +35,6 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 node_modules
-dist
-dist-ssr
 *.local
 # Editor directories and files
 .vscode/*
@@ -48,3 +45,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# 빌드 산출물은 루트만 제외한다. vendor/*/dist 는 배포에 필요하므로 커밋한다.
+/dist
+/dist-ssr

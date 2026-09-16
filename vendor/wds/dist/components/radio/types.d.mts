@@ -1,0 +1,18 @@
+import { Merge, ResponsiveProps, WithSxProps } from "@wanteddev/wds-engine";
+
+//#region src/components/radio/types.d.ts
+type RadioDefaultProps = WithSxProps<{
+  /** The name of the radio. */name?: string; /** Whether the radio is checked. */
+  checked?: boolean;
+  value?: string; /** Whether the radio is disabled. */
+  disabled?: boolean;
+  required?: boolean; /** Whether the radio is invalid. */
+  invalid?: boolean; /** The size of the radio. */
+  size?: 'medium' | 'small'; /** Callback function when the radio is checked. */
+  onCheck?: () => void; /** If you want to remove the left/right spacing to align items, use this prop. */
+  tight?: boolean;
+}>;
+type RadioResponsiveProps = ResponsiveProps<Pick<RadioDefaultProps, 'size'>>;
+type RadioProps = Merge<RadioDefaultProps, RadioResponsiveProps>;
+//#endregion
+export { RadioDefaultProps, RadioProps, RadioResponsiveProps };

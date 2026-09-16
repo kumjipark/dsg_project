@@ -1,0 +1,34 @@
+'use client';
+Object.defineProperties(exports, {
+	__esModule: { value: true },
+	[Symbol.toStringTag]: { value: "Module" }
+});
+let _wanteddev_wds_engine = require("@wanteddev/wds-engine");
+let react = require("react");
+let react_jsx_runtime = require("react/jsx-runtime");
+//#region src/icon-circle.tsx
+/**
+* 원형을 표현합니다.
+* 키워드: Oval, 원형
+* 속성: Outlined
+*/
+const IconCircle = (0, react.forwardRef)((props, ref) => {
+	return /* @__PURE__ */ (0, react_jsx_runtime.jsx)(_wanteddev_wds_engine.Box, {
+		as: "svg",
+		viewBox: "0 0 24 24",
+		fill: "none",
+		xmlns: "http://www.w3.org/2000/svg",
+		width: "1em",
+		height: "1em",
+		ref,
+		...props,
+		children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)("path", {
+			fillRule: "evenodd",
+			clipRule: "evenodd",
+			d: "M11.9999 3.9001C7.52642 3.9001 3.89994 7.52659 3.89994 12.0001C3.89994 16.4736 7.52642 20.1001 11.9999 20.1001C16.4734 20.1001 20.0999 16.4736 20.0999 12.0001C20.0999 7.52659 16.4734 3.9001 11.9999 3.9001ZM2.09995 12.0001C2.09995 6.53248 6.53231 2.1001 11.9999 2.1001C17.4675 2.1001 21.8999 6.53248 21.8999 12.0001C21.8999 17.4677 17.4675 21.9001 11.9999 21.9001C6.53231 21.9001 2.09995 17.4677 2.09995 12.0001Z",
+			fill: "currentColor"
+		})
+	});
+});
+//#endregion
+exports.default = IconCircle;

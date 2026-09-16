@@ -1,0 +1,36 @@
+'use client';
+import { getWeightMap, variantMap } from "../components/typography/style.mjs";
+import { css } from "@wanteddev/wds-engine";
+//#region src/utils/typography.ts
+const typographyStyle = (variant, weight) => css`
+  ${variantMap[variant]};
+  ${weight && getWeightMap(variant)[weight]};
+`;
+const ellipsisTypographyStyle = (line = 1) => line === 1 ? css`
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      ` : css`
+        overflow: hidden;
+        position: relative;
+        /* stylelint-disable */
+        display: -webkit-box;
+        -webkit-line-clamp: ${line};
+        -webkit-box-orient: vertical;
+        /* stylelint-enable */
+      `;
+const listStyle = css`
+  list-style-type: disc;
+  padding-left: 1.5em;
+
+  ul {
+    list-style-type: circle;
+    padding-left: 1.5em;
+  }
+
+  li::marker {
+    font-size: 0.8em;
+  }
+`;
+//#endregion
+export { ellipsisTypographyStyle, listStyle, typographyStyle };

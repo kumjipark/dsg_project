@@ -1,0 +1,207 @@
+import { ComponentPropsWithoutRef, ComponentRef, ElementType, JSX, Ref } from "react";
+import { EmotionCache, Interpolation, Interpolation as Interpolation$1, SerializedStyles } from "@emotion/react";
+import { CSSInterpolation } from "@emotion/serialize";
+import { BreakPoint, BreakPoint as BreakPoint$1, Spacing, Theme, Theme as Theme$1, ThemeColorsToken, ThemeOpacityToken, ThemeShadowToken, ThemeToken } from "@wanteddev/wds-theme";
+import { Options as CacheOptions } from "@emotion/cache";
+
+//#region src/types/index.d.ts
+/**
+ * Type for the `sx` prop, enabling Emotion styles with theme support.
+ *
+ * @example
+ * <Box sx={{ color: 'primary' }} />
+ */
+type SxProp = Interpolation$1<Theme$1>;
+/**
+ * Omits a set of keys from each member of a union type.
+ *
+ * @example
+ * type A = { a: string; b: number } | { a: string; c: boolean };
+ * type B = DistributiveOmit<A, 'a'>; // { b: number } | { c: boolean }
+ */
+type DistributiveOmit<T, K extends keyof any> = T extends any ? Omit<T, K> : never;
+/**
+ * Merges two types, with properties from the first type taking precedence.
+ *
+ * @example
+ * type A = { a: string; b: number };
+ * type B = { b: boolean; c: string };
+ * type C = Merge<A, B>; // { a: string; b: number; c: string }
+ */
+type Merge<T, K> = T & DistributiveOmit<K, keyof T>;
+/**
+ * Merges custom props with element props, excluding the element's `as` prop
+ * to prevent conflicts with the polymorphic `as` prop
+ * (e.g., Next.js Link's `as?: Url`).
+ */
+type MergeElementProps<P, C extends ElementType> = P & DistributiveOmit<ComponentPropsWithoutRef<C>, keyof P | 'as'>;
+/**
+ * Adds the `sx` prop to a given props type for custom Emotion styling.
+ *
+ * @example
+ * type ButtonProps = WithSxProps<{ disabled?: boolean }>;
+ * // { disabled?: boolean; sx?: SxProp }
+ */
+type WithSxProps<T> = T & {
+  sx?: SxProp;
+};
+/**
+ * Defines responsive props for each breakpoint, optionally including an `sx` style.
+ *
+ * @example
+ * type Responsive = ResponsiveProps<{ color: string }>;
+ * // { sm?: { color: string; sx?: CSSInterpolation }; ... }
+ */
+type ResponsiveProps<T> = { [key in keyof BreakPoint$1]?: keyof T extends never ? {
+  sx?: CSSInterpolation;
+} : Merge<T, {
+  sx?: CSSInterpolation;
+}> };
+/**
+ * Merges custom props with the props of a given element type, including `ref` and `sx`.
+ * Used for polymorphic components supporting the `as` prop.
+ *
+ * @template P Custom props
+ * @template C React element type
+ *
+ * @example
+ * type Props = OverrideProps<{ custom: string }, 'a'>;
+ */
+type OverrideProps<P, C extends ElementType> = MergeElementProps<P, C> & {
+  ref?: Ref<ComponentRef<C>>;
+  sx?: SxProp;
+};
+/**
+ * Like OverrideProps, but excludes `sx`. Used internally when handling `sx` separately.
+ *
+ * @template P Custom props
+ * @template C React element type
+ *
+ * @example
+ * type Props = OverridePropsInternal<{ custom: string }, 'a'>;
+ */
+type OverridePropsInternal<P, C extends ElementType> = MergeElementProps<P, C> & {
+  ref?: Ref<ComponentRef<C>>;
+};
+/**
+ * Props for a polymorphic component supporting the `as` prop.
+ *
+ * - `as` allows rendering as a different element/component (default: 'div').
+ * - Combines custom props, element props, `ref`, and `sx`.
+ *
+ * @template P Custom props
+ * @template C React element type (default: 'div')
+ *
+ * @example
+ * type ButtonProps = PolymorphicProps<{ custom: string }, 'a'>;
+ */
+type PolymorphicProps<P, C extends ElementType = 'div'> = {
+  as?: C;
+} & OverrideProps<P, C>;
+/**
+ * Interface for a polymorphic React component supporting the `as` prop.
+ *
+ * - Can render as different elements/components via `as`.
+ * - Supports generic and default element types.
+ * - Includes standard static properties.
+ *
+ * @template P Custom props
+ * @template E Default element type (default: 'div')
+ */
+interface PolymorphicComponent<P, E extends ElementType = 'div'> {
+  /**
+   * Render as a specified element type.
+   */
+  <C extends ElementType = E>(props: {
+    as?: C;
+  } & OverrideProps<P, C>): JSX.Element;
+  /**
+   * Render as the default element type.
+   */
+  (props: DefaultComponentProps<P, E>): JSX.Element;
+  propTypes?: any;
+  displayName?: string | undefined;
+}
+/**
+ * Default props for a component, merging custom props with a specified element type.
+ *
+ * - Adds `sx` for styling and `ref` forwarding.
+ *
+ * @template P Custom props
+ * @template E React element type (default: 'div')
+ */
+type DefaultComponentProps<P, E extends ElementType = 'div'> = MergeElementProps<P, E> & {
+  sx?: SxProp;
+  ref?: Ref<ComponentRef<E>>;
+};
+/**
+ * Internal: Removes `sx` from a props type wrapped with `WithSxProps`.
+ *
+ * - Use inside component implementations to handle `sx` separately.
+ * - `P` must be a type wrapped with `WithSxProps`.
+ *
+ * @template P Props with `WithSxProps`
+ * @template E React element type (default: 'div')
+ *
+ * @example
+ * ```tsx
+ * export type MyComponentProps = WithSxProps<{ ... }>
+ *
+ * const Component = (props: DefaultComponentPropsInternal<MyComponentProps, 'div'>) => {}
+ * ```
+ */
+type DefaultComponentPropsInternal<P, E extends ElementType = 'div'> = MergeElementProps<P, E> & {
+  ref?: Ref<ComponentRef<E>>;
+};
+/**
+ * Internal: Removes `sx` from a props type wrapped with `WithSxProps` for polymorphic components.
+ *
+ * - Use inside component implementations to handle `sx` separately.
+ * - `P` must be a type wrapped with `WithSxProps`.
+ *
+ * @template P Props with `WithSxProps`
+ * @template C React element type (default: 'div')
+ *
+ * @example
+ * ```tsx
+ * export type MyComponentProps = WithSxProps<{ ... }>
+ *
+ * const Component = <T extends ElementType = 'div'>(props: PolymorphicPropsInternal<MyComponentProps, T>) => {}
+ * ```
+ */
+type PolymorphicPropsInternal<P, C extends ElementType = 'div'> = {
+  as?: C;
+} & OverridePropsInternal<P, C>;
+/**
+ * Internal: Interface for a polymorphic component without the `sx` prop.
+ *
+ * - Use inside component implementations to handle `sx` separately.
+ * - `P` must be a type wrapped with `WithSxProps`.
+ *
+ * @template P Props with `WithSxProps`
+ * @template E Default element type (default: 'div')
+ *
+ * @example
+ * ```tsx
+ * export type MyComponentProps = WithSxProps<{ ... }>
+ *
+ * const Component = forwardRef(
+ *   <T extends ElementType = 'div'>(
+ *     props: PolymorphicPropsInternal<MyComponentProps, T>,
+ *     ref: ForwardedRef<T>,
+ *   ) => {
+ *     return <Box ref={ref} {...props} />;
+ *   },
+ * ) as PolymorphicComponentInternal<MyComponentProps, 'div'>;
+ * ```
+ */
+interface PolymorphicComponentInternal<P, E extends ElementType = 'div'> {
+  <C extends ElementType = E>(props: {
+    as?: C;
+  } & OverridePropsInternal<P, C>): JSX.Element;
+  (props: DefaultComponentPropsInternal<P, E>): JSX.Element;
+  propTypes?: any;
+  displayName?: string | undefined;
+}
+//#endregion
+export { type BreakPoint, CSSInterpolation, type CacheOptions, DefaultComponentProps, DefaultComponentPropsInternal, DistributiveOmit, type EmotionCache, type Interpolation, Merge, OverrideProps, OverridePropsInternal, PolymorphicComponent, PolymorphicComponentInternal, PolymorphicProps, PolymorphicPropsInternal, ResponsiveProps, type SerializedStyles, type Spacing, SxProp, type Theme, type ThemeColorsToken, type ThemeOpacityToken, type ThemeShadowToken, type ThemeToken, WithSxProps };

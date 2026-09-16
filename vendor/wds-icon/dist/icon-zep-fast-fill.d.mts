@@ -1,0 +1,14 @@
+import { SxProp } from "@wanteddev/wds-engine";
+import * as _$react from "react";
+
+//#region src/icon-zep-fast-fill.d.ts
+/**
+ * 속도를 표현합니다.
+ * 키워드: Thunder, 번개, 속도, Fast
+ * 속성: Solid
+ */
+declare const IconZepFastFill: _$react.ForwardRefExoticComponent<Omit<_$react.SVGProps<SVGSVGElement>, "ref"> & {
+  sx?: SxProp;
+} & _$react.RefAttributes<SVGSVGElement>>;
+//#endregion
+export { IconZepFastFill as default };

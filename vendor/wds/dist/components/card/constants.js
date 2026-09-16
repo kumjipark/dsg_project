@@ -1,0 +1,28 @@
+'use client';
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+//#region src/components/card/constants.ts
+const CARD_NAME = "Card";
+const CARD_THUMBNAIL_NAME = "CardThumbnail";
+const CARD_THUMBNAIL_CONTENT_NAME = "CardThumbnailContent";
+const CARD_CONTENT_NAME = "CardContent";
+const CARD_CONTENT_ITEM_NAME = "CardContentItem";
+const CARD_TITLE_NAME = "CardTitle";
+const CARD_CAPTION_NAME = "CardCaption";
+const CARD_SKELETON_NAME = "CardSkeleton";
+const CARD_THUMBNAIL_SKELETON_NAME = "CardThumbnailSkeleton";
+const CARD_CONTENT_ITEM_SKELETON_NAME = "CardContentItemSkeleton";
+const CARD_TITLE_SKELETON_NAME = "CardTitleSkeleton";
+const CARD_CAPTION_SKELETON_NAME = "CardCaptionSkeleton";
+//#endregion
+exports.CARD_CAPTION_NAME = CARD_CAPTION_NAME;
+exports.CARD_CAPTION_SKELETON_NAME = CARD_CAPTION_SKELETON_NAME;
+exports.CARD_CONTENT_ITEM_NAME = CARD_CONTENT_ITEM_NAME;
+exports.CARD_CONTENT_ITEM_SKELETON_NAME = CARD_CONTENT_ITEM_SKELETON_NAME;
+exports.CARD_CONTENT_NAME = CARD_CONTENT_NAME;
+exports.CARD_NAME = CARD_NAME;
+exports.CARD_SKELETON_NAME = CARD_SKELETON_NAME;
+exports.CARD_THUMBNAIL_CONTENT_NAME = CARD_THUMBNAIL_CONTENT_NAME;
+exports.CARD_THUMBNAIL_NAME = CARD_THUMBNAIL_NAME;
+exports.CARD_THUMBNAIL_SKELETON_NAME = CARD_THUMBNAIL_SKELETON_NAME;
+exports.CARD_TITLE_NAME = CARD_TITLE_NAME;
+exports.CARD_TITLE_SKELETON_NAME = CARD_TITLE_SKELETON_NAME;
