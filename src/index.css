@@ -1,0 +1,23 @@
+#root {
+  display: flex;
+  justify-content: center;
+  min-height: 100dvh;
+}
+
+/* 모바일에서 주로 공유되므로 좁은 폭을 기준으로 잡고 가운데 정렬한다. */
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  min-height: 100dvh;
+  padding: 24px 20px 32px;
+  box-sizing: border-box;
+  /* 한국어는 어절 단위로 끊어야 '화가일/까?' 처럼 깨지지 않는다. */
+  word-break: keep-all;
+}
+
+/* 문항·유형 설명의 줄바꿈(\n)을 그대로 살린다. */
+.preline {
+  white-space: pre-line;
+}
